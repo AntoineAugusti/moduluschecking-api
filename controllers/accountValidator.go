@@ -27,10 +27,14 @@ func (b bankAccountRequest) isValid() bool {
 	return sortCodeLength == 6 && (accountNumberLength >= 6 && accountNumberLength <= 10)
 }
 
-type validityResponse struct {
-	SortCode      string `json:"sort_code"`
+// Tell in JSON if a bank account is valid
+type ValidityResponse struct {
+	// The bank account sort code
+	SortCode string `json:"sort_code"`
+	// The bank account number
 	AccountNumber string `json:"account_number"`
-	Valid         bool   `json:"is_valid"`
+	// The validity of the given bank account
+	Valid bool `json:"is_valid"`
 }
 
 type accountValidator struct {
@@ -61,7 +65,7 @@ func (validator accountValidator) AccountValidatorPost(w http.ResponseWriter, re
 	isValid := validator.resolver.IsValid(b)
 
 	// Construct and render the final response
-	response := validityResponse{
+	response := ValidityResponse{
 		Valid:         isValid,
 		SortCode:      b.SortCode,
 		AccountNumber: b.AccountNumber,

@@ -6,6 +6,16 @@ import (
 	"github.com/cloudflare/service/render"
 )
 
+// A simple struct to easily respond some JSON
+type APIMessage struct {
+	// The HTTP status code
+	code int
+	// The status key
+	Status string `json:"status"`
+	// A human-readable message
+	Message string `json:"message"`
+}
+
 // Write a message saying that the client should provide
 // authentication details
 func WriteUnauthorized(w http.ResponseWriter) {
@@ -19,13 +29,7 @@ func WriteUnprocessableEntity(w http.ResponseWriter) {
 
 // Write a message with a given status code, a status and a message
 func WriteMessage(code int, status string, message string, w http.ResponseWriter) {
-	type apiMessage struct {
-		code    int
-		Status  string `json:"status"`
-		Message string `json:"message"`
-	}
-
-	response := apiMessage{
+	response := APIMessage{
 		code:    code,
 		Status:  status,
 		Message: message,
