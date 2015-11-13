@@ -24,11 +24,12 @@ func NewLimiter(redisConnexion *redis.Client) *Limiter {
 func (l *Limiter) ServeHTTP(w http.ResponseWriter, req *http.Request, next http.HandlerFunc) {
 	apiKey := req.Header.Get("Api-Key")
 
-	// Limit to 5 requests per minute
+	// Here, in real life, we would typically create a limiter
+	// based on information from the given API key
 	hasher := speedbump.PerMinuteHasher{}
 	limiter := speedbump.NewLimiter(l.redisConnexion, hasher, 5)
 
-	success, err := limiter.Attempt(apiKey)
+	canAccess, err := limiter.Attempt(apiKey)
 	// Trouble with Redis?
 	if err != nil {
 		respondRedisError(w)
@@ -36,7 +37,7 @@ func (l *Limiter) ServeHTTP(w http.ResponseWriter, req *http.Request, next http.
 	}
 
 	// Over the rate limit?
-	if !success {
+	if !canAccess {
 		responses.WriteMessage(429, "rate_exceeded", "API rate exceeded. Too many requests.", w)
 		return
 	}
