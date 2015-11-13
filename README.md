@@ -1,5 +1,7 @@
+[![Travis CI](https://img.shields.io/travis/AntoineAugusti/moduluschecking-api/master.svg?style=flat-square)](https://travis-ci.org/AntoineAugusti/moduluschecking-api)
 [![Software License](https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square)](https://github.com/AntoineAugusti/moduluschecking-api/LICENSE.md)
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/AntoineAugusti/moduluschecking-api)
+[![Coverage Status](http://codecov.io/github/AntoineAugusti/moduluschecking-api/coverage.svg?branch=master)](http://codecov.io/github/AntoineAugusti/moduluschecking-api?branch=master)
 
 ## Modulus checking API
 This package is an API to validate UK bank account numbers, supporting authentication and rate limits.
