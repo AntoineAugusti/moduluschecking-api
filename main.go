@@ -10,7 +10,13 @@ import (
 	"gopkg.in/redis.v3"
 )
 
+var buildTag = "dev"
+var buildDate = "0001-01-01T00:00:00Z"
+
 func main() {
+	service.BuildTag = buildTag
+	service.BuildDate = buildDate
+
 	address := flag.String("a", ":8080", "address to listen")
 	flag.Parse()
 
