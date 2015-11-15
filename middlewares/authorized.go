@@ -15,15 +15,21 @@ func NewAuthorization() *Authorization {
 }
 
 // The middleware handler
-func (l *Authorization) ServeHTTP(w http.ResponseWriter, req *http.Request, next http.HandlerFunc) {
+func (a *Authorization) ServeHTTP(w http.ResponseWriter, req *http.Request, next http.HandlerFunc) {
 
 	apiKey := req.Header.Get("Api-Key")
 
-	if len(apiKey) == 0 {
+	if len(apiKey) == 0 || !a.apiKeyExists(apiKey) {
 		responses.WriteUnauthorized(w)
 		return
 	}
 
 	// Call the next middleware handler
 	next(w, req)
+}
+
+// Check that an API key exists. This is where in real life
+// a database call should be done.
+func (a Authorization) apiKeyExists(apiKey string) bool {
+	return apiKey == "foo"
 }

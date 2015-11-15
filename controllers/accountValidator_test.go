@@ -43,7 +43,7 @@ func TestRequiresApiKey(t *testing.T) {
 	request, _ := http.NewRequest("POST", base, nil)
 	res, _ := http.DefaultClient.Do(request)
 
-	assertResponseWithStatusAndMessage(t, res, http.StatusUnauthorized, "authorization_required", "Please provide a HTTP header called Api-Key")
+	assertResponseWithStatusAndMessage(t, res, http.StatusUnauthorized, "authorization_required", "Please provide a HTTP header called Api-Key.")
 }
 
 func TestWarnsIfCannotDecodeJSON(t *testing.T) {
@@ -134,7 +134,7 @@ func newRedis() *redis.Client {
 }
 
 func assert422Response(t *testing.T, res *http.Response) {
-	assertResponseWithStatusAndMessage(t, res, 422, "invalid_json", "Cannot decode the given JSON payload")
+	assertResponseWithStatusAndMessage(t, res, 422, "invalid_json", "Cannot decode the given JSON payload.")
 }
 
 func assertBankAccountResponse(t *testing.T, res *http.Response, sortCode, accountNumber string, isValid bool) {
