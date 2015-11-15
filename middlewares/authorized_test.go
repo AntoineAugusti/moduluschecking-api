@@ -17,16 +17,24 @@ func TestMiddlewareBlocksWithoutApiKey(t *testing.T) {
 	request, _ := http.NewRequest("GET", "foo", nil)
 	n.ServeHTTP(responseRecorder, request)
 
-	status := "authorization_required"
-	message := "Please provide a HTTP header called Api-Key"
-	assertResponseWithStatusAndMessage(t, responseRecorder, http.StatusUnauthorized, status, message)
+	assertAuthorizationRequired(t, responseRecorder)
 }
 
-func TestMiddlewareLetThroughWithApiKey(t *testing.T) {
+func TestMiddlewareBlockWithWrongApiKey(t *testing.T) {
 	n, responseRecorder := prepareMiddlewareAndRecorder()
 
-	request, _ := http.NewRequest("GET", "foo", nil)
-	request.Header.Set("Api-Key", "bar")
+	request, _ := http.NewRequest("GET", "bar", nil)
+	request.Header.Set("Api-Key", "ab")
+	n.ServeHTTP(responseRecorder, request)
+
+	assertAuthorizationRequired(t, responseRecorder)
+}
+
+func TestMiddlewareLetThroughWithValidApiKey(t *testing.T) {
+	n, responseRecorder := prepareMiddlewareAndRecorder()
+
+	request, _ := http.NewRequest("GET", "bar", nil)
+	request.Header.Set("Api-Key", "foo")
 	n.ServeHTTP(responseRecorder, request)
 
 	assert.Equal(t, http.StatusOK, responseRecorder.Code)
@@ -39,6 +47,12 @@ func prepareMiddlewareAndRecorder() (*negroni.Negroni, *httptest.ResponseRecorde
 	recorder := httptest.NewRecorder()
 
 	return n, recorder
+}
+
+func assertAuthorizationRequired(t *testing.T, res *httptest.ResponseRecorder) {
+	status := "authorization_required"
+	message := "Please provide a HTTP header called Api-Key."
+	assertResponseWithStatusAndMessage(t, res, http.StatusUnauthorized, status, message)
 }
 
 func assertResponseWithStatusAndMessage(t *testing.T, res *httptest.ResponseRecorder, code int, status, message string) {

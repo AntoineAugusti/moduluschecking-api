@@ -19,12 +19,12 @@ type APIMessage struct {
 // Write a message saying that the client should provide
 // authentication details
 func WriteUnauthorized(w http.ResponseWriter) {
-	WriteMessage(401, "authorization_required", "Please provide a HTTP header called Api-Key", w)
+	WriteMessage(401, "authorization_required", "Please provide a HTTP header called Api-Key.", w)
 }
 
 // Write a message saying that we cannot parse the given JSON payload
 func WriteUnprocessableEntity(w http.ResponseWriter) {
-	WriteMessage(422, "invalid_json", "Cannot decode the given JSON payload", w)
+	WriteMessage(422, "invalid_json", "Cannot decode the given JSON payload.", w)
 }
 
 // Write a message with a given status code, a status and a message

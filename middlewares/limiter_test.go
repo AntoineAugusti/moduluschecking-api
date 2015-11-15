@@ -30,8 +30,8 @@ func TestMiddlewareBlocksAfter5RequestsPerSecond(t *testing.T) {
 
 	n, responseRecorder := prepareLimiterMiddlewareAndRecorder()
 
-	request, _ := http.NewRequest("GET", "foo", nil)
-	request.Header.Set("Api-Key", "bar")
+	request, _ := http.NewRequest("GET", "bar", nil)
+	request.Header.Set("Api-Key", "foo")
 	n.ServeHTTP(responseRecorder, request)
 
 	for i := 4; i >= 1; i-- {
@@ -51,8 +51,8 @@ func TestHandleAClosedRedisConnexion(t *testing.T) {
 
 	n, responseRecorder := prepareLimiterMiddlewareAndRecorder()
 
-	request, _ := http.NewRequest("GET", "foo", nil)
-	request.Header.Set("Api-Key", "bar")
+	request, _ := http.NewRequest("GET", "bar", nil)
+	request.Header.Set("Api-Key", "foo")
 	n.ServeHTTP(responseRecorder, request)
 
 	assertResponseWithStatusAndMessage(t, responseRecorder, http.StatusInternalServerError, "server_error", "Trouble contacting Redis. Aborting.")
