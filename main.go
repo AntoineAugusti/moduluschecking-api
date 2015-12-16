@@ -16,6 +16,8 @@ var buildDate = "0001-01-01T00:00:00Z"
 func main() {
 	service.BuildTag = buildTag
 	service.BuildDate = buildDate
+	service.VersionRoute = "/version"
+	service.HeartbeatRoute = "/heartbeat"
 
 	address := flag.String("a", ":8080", "address to listen")
 	flag.Parse()
