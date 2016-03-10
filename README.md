@@ -4,7 +4,7 @@
 [![Coverage Status](http://codecov.io/github/AntoineAugusti/moduluschecking-api/coverage.svg?branch=master)](http://codecov.io/github/AntoineAugusti/moduluschecking-api?branch=master)
 
 ## Modulus checking API
-This package is an API to validate UK bank account numbers, supporting authentication and rate limits.
+This package is an API to validate UK bank account numbers, supporting authentication and rate limits. This package has been presented in a [blog post](https://blog.antoine-augusti.fr/2015/11/developing-and-deploying-a-modulus-checking-api/) where you can find instructions to deploy behind Nginx.
 
 ## What is modulus checking?
 Modulus checking is a procedure for validating sort code and account number combinations for UK bank accounts.
