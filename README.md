@@ -15,10 +15,10 @@ Modulus checking is a procedure for validating sort code and account number comb
 
 ## Other packages used
 For additional documentation, check out these packages I'm using:
-- [https://github.com/cloudflare/service](cloudflare/service) to create the web service and provide default endpoints
-- [https://github.com/etcinit/speedbump](etcinit/speedbump) for the rate limiting functionality
-- [https://github.com/codegangsta/negroni](codegangsta/negroni) for middlewares
-- [https://github.com/AntoineAugusti/moduluschecking](AntoineAugusti/moduluschecking) for actually validating bank account numbers
+- [cloudflare/service](https://github.com/cloudflare/service) to create the web service and provide default endpoints
+- [etcinit/speedbump](https://github.com/etcinit/speedbump) for the rate limiting functionality
+- [codegangsta/negroni](https://github.com/codegangsta/negroni) for middlewares
+- [AntoineAugusti/moduluschecking](https://github.com/AntoineAugusti/moduluschecking) for actually validating bank account numbers
 
 ## Getting started
 You can grab this package with the following command:
